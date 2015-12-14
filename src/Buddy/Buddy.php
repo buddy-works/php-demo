@@ -42,7 +42,7 @@ class Buddy
      */
     public function sub($v1, $v2)
     {
-        if (is_int($v1)) {
+        if (!is_int($v1)) {
             throw new \Exception('v1 is not an integer');
         }
         if (!is_int($v2)) {
