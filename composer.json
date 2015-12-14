@@ -1,0 +1,24 @@
+{
+  "name": "buddy-works/buddy-works-demo-php",
+  "description": "Buddy Works demo project for php",
+  "type": "library",
+  "license": "Apache 2.0",
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "2.*",
+    "phpunit/phpunit": "~4.0",
+    "mockery/mockery": "~0.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "Buddy\\": "src/Buddy/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Buddy\\Tests\\": "tests/"
+    }
+  }
+}
