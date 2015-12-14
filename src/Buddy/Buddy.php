@@ -33,4 +33,21 @@ class Buddy
         }
         return $v1 + $v2;
     }
+
+    /**
+     * @param int $v1
+     * @param int $v2
+     * @return int
+     * @throws \Exception
+     */
+    public function sub($v1, $v2)
+    {
+        if (is_int($v1)) {
+            throw new \Exception('v1 is not an integer');
+        }
+        if (!is_int($v2)) {
+            throw new \Exception('v2 is not an integer');
+        }
+        return $v1 - $v2;
+    }
 }
