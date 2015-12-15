@@ -80,4 +80,31 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
         $buddy = new Buddy();
         $buddy->sub(3, '2');
     }
+
+    public function testMul()
+    {
+        $buddy = new Buddy();
+        $this->assertEquals(6, $buddy->mul(3, 2));
+
+    }
+
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage v1 is not an integer
+     */
+    public function testMulWrongV1()
+    {
+        $buddy = new Buddy();
+        $buddy->mul('3', 2);
+    }
+
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage v2 is not an integer
+     */
+    public function testMulWrongV2()
+    {
+        $buddy = new Buddy();
+        $buddy->mul(3, '2');
+    }
 }
