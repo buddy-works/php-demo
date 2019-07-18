@@ -61,8 +61,9 @@ class BuddyTest extends TestCase
         $buddy = new Buddy();
         $this->assertEquals(0, $buddy->fib(0));
         $this->assertEquals(1, $buddy->fib(1));
-        $this->assertEquals(4, $buddy->fib(5));
-        $this->assertEquals(10, $buddy->fib(55));
+        $this->assertEquals(5, $buddy->fib(4));
+        $this->assertEquals(55, $buddy->fib(10));
+        $this->assertEquals(6765, $buddy->fib(20));
     }
 
     public function testSubWrongV1()
