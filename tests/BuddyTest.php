@@ -37,14 +37,14 @@ class BuddyTest extends TestCase
 
     public function testAddWrongV1()
     {
-        $this->expectException('v1 is not an integer');
+        $this->expectExceptionMessage('v1 is not an integer');
         $buddy = new Buddy();
         $buddy->add('1', 2);
     }
 
     public function testAddWrongV2()
     {
-        $this->expectException('v2 is not an integer');
+        $this->expectExceptionMessage('v2 is not an integer');
         $buddy = new Buddy();
         $buddy->add(1, '2');
     }
@@ -67,35 +67,35 @@ class BuddyTest extends TestCase
 
     public function testSubWrongV1()
     {
-        $this->expectException('v1 is not an integer');
+        $this->expectExceptionMessage('v1 is not an integer');
         $buddy = new Buddy();
         $buddy->sub('3', 2);
     }
 
     public function testSubWrongV2()
     {
-        $this->expectException('v2 is not an integer');
+        $this->expectExceptionMessage('v2 is not an integer');
         $buddy = new Buddy();
         $buddy->sub(3, '2');
     }
 
     public function testFibOffline()
     {
-        $this->expectException('fib service is offline');
+        $this->expectExceptionMessage('fib service is offline');
         $buddy = new Buddy('http://localhost:1234');
         $buddy->fib(1);
     }
 
     public function testFibWrongN()
     {
-        $this->expectException('n is not an integer');
+        $this->expectExceptionMessage('n is not an integer');
         $buddy = new Buddy();
         $buddy->fib('1');
     }
 
     public function testFibNLessThan0()
     {
-        $this->expectException('n must be greater or equal 0');
+        $this->expectExceptionMessage('n must be greater or equal 0');
         $buddy = new Buddy();
         $buddy->fib(-1);
     }
