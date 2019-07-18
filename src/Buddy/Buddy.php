@@ -18,6 +18,16 @@ namespace Buddy;
 class Buddy
 {
     /**
+     * @var string
+     */
+    private $legacyUrl;
+
+    public function __construct()
+    {
+        $this->legacyUrl = isset($_ENV['LEGACY_URL']) ? $_ENV['LEGACY_URL'] : 'http://localhost:8000';
+    }
+
+    /**
      * @param int $v1
      * @param int $v2
      * @return int
@@ -49,5 +59,21 @@ class Buddy
             throw new \Exception('v2 is not an integer');
         }
         return $v1 - $v2;
+    }
+
+    /**
+     * @param int $n
+     * @return int
+     * @throws \Exception
+     */
+    public function fib($n)
+    {
+        if (!is_int($n)) {
+            throw new \Exception('n is not an integer');
+        }
+        if ($n < 0) {
+            throw new \Exception('n must be greater or equal 0');
+        }
+        return intval(file_get_contents($this->legacyUrl . '?n=' . $n));
     }
 }

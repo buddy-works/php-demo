@@ -61,6 +61,15 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testFib()
+    {
+        $buddy = new Buddy();
+        $this->assertEquals(0, $buddy->fib(0));
+        $this->assertEquals(1, $buddy->fib(1));
+        $this->assertEquals(4, $buddy->fib(5));
+        $this->assertEquals(10, $buddy->fib(55));
+    }
+
     /**
      * @expectedException \Exception
      * @expectedExceptionMessage v1 is not an integer
@@ -79,5 +88,25 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
     {
         $buddy = new Buddy();
         $buddy->sub(3, '2');
+    }
+
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage n is not an integer
+     */
+    public function testFibWrongN()
+    {
+        $buddy = new Buddy();
+        $buddy->fib('1');
+    }
+
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage n must be greater or equal 0
+     */
+    public function testFibNLessThan0()
+    {
+        $buddy = new Buddy();
+        $buddy->fib(-1);
     }
 }
