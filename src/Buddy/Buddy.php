@@ -24,9 +24,15 @@ class Buddy
      */
     private $legacyUrl;
 
-    public function __construct()
+    /**
+     * Buddy constructor.
+     * @param string|null $legacyUrl
+     */
+    public function __construct($legacyUrl = null)
     {
-        $this->legacyUrl = isset($_ENV['LEGACY_URL']) ? $_ENV['LEGACY_URL'] : 'http://localhost:8000';
+        if (isset($legacyUrl)) $this->legacyUrl = $legacyUrl;
+        else if (isset($_ENV['LEGACY_URL'])) $this->legacyUrl = $_ENV['LEGACY_URL'];
+        else $this->$legacyUrl = 'http://localhost:8000';
     }
 
     /**
@@ -76,6 +82,10 @@ class Buddy
         if ($n < 0) {
             throw new Exception('n must be greater or equal 0');
         }
-        return intval(file_get_contents($this->legacyUrl . '?n=' . $n));
+        $res = @file_get_contents($this->legacyUrl . '?n=' . $n);
+        if ($res === false) {
+            throw new Exception('fib service is offline');
+        }
+        return intval($res);
     }
 }
