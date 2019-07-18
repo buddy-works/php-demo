@@ -16,8 +16,10 @@
 namespace Buddy\Tests;
 
 use Buddy\Buddy;
+use PHPUnit\Framework\TestCase;
+use Exception;
 
-class BuddyTest extends \PHPUnit_Framework_TestCase
+class BuddyTest extends TestCase
 {
     public function testInstantiating()
     {
@@ -27,6 +29,9 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(method_exists($buddy, 'sub'));
     }
 
+    /**
+     * @expectedException Exception
+     */
     public function testAdd()
     {
         $buddy = new Buddy();
@@ -35,7 +40,7 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage v1 is not an integer
      */
     public function testAddWrongV1()
@@ -45,7 +50,7 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage v2 is not an integer
      */
     public function testAddWrongV2()
@@ -54,6 +59,9 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
         $buddy->add(1, '2');
     }
 
+    /**
+     * @expectedException Exception
+     */
     public function testSub()
     {
         $buddy = new Buddy();
@@ -61,6 +69,9 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * @expectedException Exception
+     */
     public function testFib()
     {
         $buddy = new Buddy();
@@ -71,7 +82,7 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage v1 is not an integer
      */
     public function testSubWrongV1()
@@ -81,7 +92,7 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage v2 is not an integer
      */
     public function testSubWrongV2()
@@ -91,7 +102,7 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage n is not an integer
      */
     public function testFibWrongN()
@@ -101,7 +112,7 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage n must be greater or equal 0
      */
     public function testFibNLessThan0()

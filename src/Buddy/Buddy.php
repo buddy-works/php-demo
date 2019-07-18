@@ -15,6 +15,8 @@
 
 namespace Buddy;
 
+use Exception;
+
 class Buddy
 {
     /**
@@ -36,10 +38,10 @@ class Buddy
     public function add($v1, $v2)
     {
         if (!is_int($v1)) {
-            throw new \Exception('v1 is not an integer');
+            throw new Exception('v1 is not an integer');
         }
         if (!is_int($v2)) {
-            throw new \Exception('v2 is not an integer');
+            throw new Exception('v2 is not an integer');
         }
         return $v1 + $v2;
     }
@@ -53,10 +55,10 @@ class Buddy
     public function sub($v1, $v2)
     {
         if (!is_int($v1)) {
-            throw new \Exception('v1 is not an integer');
+            throw new Exception('v1 is not an integer');
         }
         if (!is_int($v2)) {
-            throw new \Exception('v2 is not an integer');
+            throw new Exception('v2 is not an integer');
         }
         return $v1 - $v2;
     }
@@ -69,10 +71,10 @@ class Buddy
     public function fib($n)
     {
         if (!is_int($n)) {
-            throw new \Exception('n is not an integer');
+            throw new Exception('n is not an integer');
         }
         if ($n < 0) {
-            throw new \Exception('n must be greater or equal 0');
+            throw new Exception('n must be greater or equal 0');
         }
         return intval(file_get_contents($this->legacyUrl . '?n=' . $n));
     }
