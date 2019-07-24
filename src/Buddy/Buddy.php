@@ -15,21 +15,39 @@
 
 namespace Buddy;
 
+use Exception;
+
 class Buddy
 {
+    /**
+     * @var string
+     */
+    private $legacyUrl;
+
+    /**
+     * Buddy constructor.
+     * @param string|null $legacyUrl
+     */
+    public function __construct($legacyUrl = null)
+    {
+        if (isset($legacyUrl)) $this->legacyUrl = $legacyUrl;
+        else if (isset($_ENV['LEGACY_URL'])) $this->legacyUrl = $_ENV['LEGACY_URL'];
+        else $this->$legacyUrl = 'http://localhost:8000';
+    }
+
     /**
      * @param int $v1
      * @param int $v2
      * @return int
-     * @throws \Exception
+     * @throws Exception
      */
     public function add($v1, $v2)
     {
         if (!is_int($v1)) {
-            throw new \Exception('v1 is not an integer');
+            throw new Exception('v1 is not an integer');
         }
         if (!is_int($v2)) {
-            throw new \Exception('v2 is not an integer');
+            throw new Exception('v2 is not an integer');
         }
         return $v1 + $v2;
     }
@@ -38,15 +56,15 @@ class Buddy
      * @param int $v1
      * @param int $v2
      * @return int
-     * @throws \Exception
+     * @throws Exception
      */
     public function sub($v1, $v2)
     {
         if (!is_int($v1)) {
-            throw new \Exception('v1 is not an integer');
+            throw new Exception('v1 is not an integer');
         }
         if (!is_int($v2)) {
-            throw new \Exception('v2 is not an integer');
+            throw new Exception('v2 is not an integer');
         }
         return $v1 - $v2;
     }
@@ -55,16 +73,36 @@ class Buddy
      * @param int $v1
      * @param int $v2
      * @return int
-     * @throws \Exception
+     * @throws Exception
      */
     public function mul($v1, $v2)
     {
         if (!is_int($v1)) {
-            throw new \Exception('v1 is not an integer');
+            throw new Exception('v1 is not an integer');
         }
         if (!is_int($v2)) {
-            throw new \Exception('v2 is not an integer');
+            throw new Exception('v2 is not an integer');
         }
         return $v1 * $v2;
+    }
+
+    /**
+     * @param int $n
+     * @return int
+     * @throws Exception
+     */
+    public function fib($n)
+    {
+        if (!is_int($n)) {
+            throw new Exception('n is not an integer');
+        }
+        if ($n < 0) {
+            throw new Exception('n must be greater or equal 0');
+        }
+        $res = @file_get_contents($this->legacyUrl . '?n=' . $n);
+        if ($res === false) {
+            throw new Exception('fib service is offline');
+        }
+        return intval($res);
     }
 }
