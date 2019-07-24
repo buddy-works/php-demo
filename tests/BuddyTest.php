@@ -16,8 +16,9 @@
 namespace Buddy\Tests;
 
 use Buddy\Buddy;
+use PHPUnit\Framework\TestCase;
 
-class BuddyTest extends \PHPUnit_Framework_TestCase
+class BuddyTest extends TestCase
 {
     public function testInstantiating()
     {
@@ -34,22 +35,16 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage v1 is not an integer
-     */
     public function testAddWrongV1()
     {
+        $this->expectExceptionMessage('v1 is not an integer');
         $buddy = new Buddy();
         $buddy->add('1', 2);
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage v2 is not an integer
-     */
     public function testAddWrongV2()
     {
+        $this->expectExceptionMessage('v2 is not an integer');
         $buddy = new Buddy();
         $buddy->add(1, '2');
     }
@@ -61,49 +56,67 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage v1 is not an integer
-     */
+    public function testFib()
+    {
+        $buddy = new Buddy();
+        $this->assertEquals(0, $buddy->fib(0));
+        $this->assertEquals(1, $buddy->fib(1));
+        $this->assertEquals(3, $buddy->fib(4));
+        $this->assertEquals(55, $buddy->fib(10));
+        $this->assertEquals(6765, $buddy->fib(20));
+    }
+
     public function testSubWrongV1()
     {
+        $this->expectExceptionMessage('v1 is not an integer');
         $buddy = new Buddy();
         $buddy->sub('3', 2);
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage v2 is not an integer
-     */
     public function testSubWrongV2()
     {
+        $this->expectExceptionMessage('v2 is not an integer');
         $buddy = new Buddy();
         $buddy->sub(3, '2');
+    }
+
+    public function testFibOffline()
+    {
+        $this->expectExceptionMessage('fib service is offline');
+        $buddy = new Buddy('http://localhost:1234');
+        $buddy->fib(1);
+    }
+
+    public function testFibWrongN()
+    {
+        $this->expectExceptionMessage('n is not an integer');
+        $buddy = new Buddy();
+        $buddy->fib('1');
+    }
+
+    public function testFibNLessThan0()
+    {
+        $this->expectExceptionMessage('n must be greater or equal 0');
+        $buddy = new Buddy();
+        $buddy->fib(-1);
     }
 
     public function testMul()
     {
         $buddy = new Buddy();
         $this->assertEquals(6, $buddy->mul(3, 2));
-
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage v1 is not an integer
-     */
     public function testMulWrongV1()
     {
+        $this->expectExceptionMessage('v1 is not an integer');
         $buddy = new Buddy();
         $buddy->mul('3', 2);
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage v2 is not an integer
-     */
     public function testMulWrongV2()
     {
+        $this->expectExceptionMessage('v2 is not an integer');
         $buddy = new Buddy();
         $buddy->mul(3, '2');
     }
